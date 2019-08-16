@@ -58,8 +58,6 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
 
   _scrollListener() {
     getVisible();
-    print(selectedItemIndex);
-    print("Listen Event raised");
     setState(() {
       selectedItemIndex = selectedItemIndex;
     });
