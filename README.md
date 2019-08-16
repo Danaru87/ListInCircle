@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 | -------------- |:------------:|:------------: |:-----------|
 | circleDiameter | double       |  | Size of the circle diameter |
 | itemCollection | List<String> |  | Items to display in the Widget |
-| initialSelectdItem | int      | 0    | Index of the default selectd item at state initialization |
+| initialSelectdItem | int      | 0    | Index of the default selected item at state initialization |
 | circleColor | Color | Colors.white | Circle background color |
 | defaultFontSize | double | circleDiameter / 4 | Default text font size (will be autmaticaly resized if needed)  |
 | onSelectionChanged | Function |  | Closure executed when selection has been changed |
