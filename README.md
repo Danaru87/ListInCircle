@@ -1,6 +1,9 @@
 # ListInCircle
 
-Flutter Widget: alist in a circle, selection done by item position.
+![](https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png)
+
+
+Flutter Widget: a list in a circle, selection done by item position.
 
 This widget display a listView in a circle and set item selected when this is in central zone of the circle.
 
