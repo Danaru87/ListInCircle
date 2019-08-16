@@ -13,15 +13,27 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
   List<String> itemCollection;
   var _keys = {};
   Function onSelectionChanged;
+  Color selectedItemColor;
+  Color unselectedItemColor;
+  double defaultFontSize;
+  Color circleBackgroundColor;
+
 
   ListInCircleWidgetState(
       {Key key,
       this.circleDiameter,
       this.selectedItemIndex,
-      this.controller,
       this.itemCollection,
-      this.onSelectionChanged})
-      : super();
+      this.onSelectionChanged,
+      this.selectedItemColor,
+      this.unselectedItemColor, 
+      this.defaultFontSize,
+      this.circleBackgroundColor})
+      : super(){
+        if (defaultFontSize == null){
+          this.defaultFontSize = circleDiameter / 4;
+        }
+      }
 
   bool _itemIsInSelectionZone(Rect itemRect, index) {
     var rect = RectGetter.getRectFromKey(listViewKey);
@@ -49,7 +61,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
     } else if (controller.offset >= controller.position.maxScrollExtent && !controller.position.outOfRange){
       selectedItemIndex = itemCollection.length - 1;
 
-    }else {
+    } else {
       _keys.forEach((index, key) {
         var itemRect = RectGetter.getRectFromKey(key);
         if(selectedItemIndex != index && _itemIsInSelectionZone(itemRect, index)){
@@ -70,6 +82,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
   @override
   void initState() {
     super.initState();
+    controller = ScrollController();
     controller.addListener(_scrollListener);
   }
 
@@ -92,7 +105,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
           child: Container(
             width: circleDiameter,
             height: circleDiameter,
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(color: circleBackgroundColor),
             child: ListView.builder(
                 padding: EdgeInsets.only(
                     top: circleDiameter / 4, bottom: circleDiameter / 2),
@@ -105,19 +118,19 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
                       key: _keys[index],
                       child: Center(
                         child: Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
                           height: circleDiameter / 3,
                           child: Center(
                             child: AutoSizeText(
                               itemCollection[index],
                               maxLines:2,
-                              maxFontSize: (circleDiameter ~/ 4).toDouble(),
-                              minFontSize: (circleDiameter ~/ 8).toDouble(),
                               textAlign: TextAlign.center,
-                              stepGranularity: 1,
+                              stepGranularity: 0.1,
                               style: TextStyle(
                                   color: (index == selectedItemIndex)
-                                      ? Colors.blueAccent
-                                      : Colors.black,
+                                      ? selectedItemColor
+                                      : unselectedItemColor,
+                                      fontSize: defaultFontSize
                               ),
                             ),
                           ),

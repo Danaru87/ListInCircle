@@ -15,32 +15,47 @@ class ListInCircleWidget extends StatefulWidget {
   /// if null => value set to 0
   final int initialSelectedItemIndex;
 
-  /// Your scroll controller (Required)
-  final ScrollController controller;
-
   /// Item string collection to display in the widget
   final List<String> itemCollection;
 
   /// Closure executed when selection has been changed
   final Function onSelectionChanged;
 
+  /// Selected item color
+  final Color selectedColor;
+
+  /// Unselected item color
+  final Color unSelectedColor;
+
+  /// Circle background color
+  final Color circleColor;
+
+  /// Default text font size (will be autmaticaly resized if needed)
+  final double defaultFontSize;
+
+
   ListInCircleWidget(
       {Key key,
       @required this.circleDiameter,
-      @required this.controller,
       this.itemCollection,
       this.onSelectionChanged,
-      this.initialSelectedItemIndex})
+      this.initialSelectedItemIndex,
+      this.selectedColor = Colors.blueAccent,
+      this.unSelectedColor = Colors.black,
+      this.defaultFontSize,
+      this.circleColor = Colors.white})
       : super(key: key);
 
 
    @override
   State<StatefulWidget> createState() => ListInCircleWidgetState(
-      controller: this.controller,
       circleDiameter: this.circleDiameter,
       itemCollection: this.itemCollection,
       onSelectionChanged: this.onSelectionChanged,
-      selectedItemIndex: this.initialSelectedItemIndex);
+      selectedItemIndex: this.initialSelectedItemIndex, 
+      selectedItemColor: this.selectedColor, 
+      unselectedItemColor: this.unSelectedColor, 
+      defaultFontSize: this.defaultFontSize);
 }
 
 
