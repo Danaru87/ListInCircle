@@ -55,7 +55,8 @@ class ListInCircleWidget extends StatefulWidget {
       selectedItemIndex: this.initialSelectedItemIndex, 
       selectedItemColor: this.selectedColor, 
       unselectedItemColor: this.unSelectedColor, 
-      defaultFontSize: this.defaultFontSize);
+      defaultFontSize: this.defaultFontSize,
+      circleBackgroundColor: circleColor);
 }
 
 
