@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:rect_getter/rect_getter.dart';
 
@@ -45,7 +46,10 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
         !controller.position.outOfRange) {
       selectedItemIndex = 0;
       return;
-    } else {
+    } else if (controller.offset >= controller.position.maxScrollExtent && !controller.position.outOfRange){
+      selectedItemIndex = itemCollection.length - 1;
+
+    }else {
       _keys.forEach((index, key) {
         var itemRect = RectGetter.getRectFromKey(key);
         if(selectedItemIndex != index && _itemIsInSelectionZone(itemRect, index)){
@@ -103,13 +107,18 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
                         child: Container(
                           height: circleDiameter / 3,
                           child: Center(
-                            child: Text(
+                            child: AutoSizeText(
                               itemCollection[index],
+                              maxLines:2,
+                              maxFontSize: (circleDiameter ~/ 4).toDouble(),
+                              minFontSize: (circleDiameter ~/ 8).toDouble(),
+                              textAlign: TextAlign.center,
+                              stepGranularity: 1,
                               style: TextStyle(
                                   color: (index == selectedItemIndex)
                                       ? Colors.blueAccent
                                       : Colors.black,
-                                  fontSize: circleDiameter / 4),
+                              ),
                             ),
                           ),
                         ),
