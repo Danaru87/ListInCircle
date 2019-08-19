@@ -3,7 +3,7 @@
 ![](https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png)
 
 
-Flutter Widget: a list in a circle, selection done by item position.
+List in a circle, selection done by item position.
 
 This widget display a listView in a circle and set item selected when this is in central zone of the circle.
 
@@ -19,18 +19,6 @@ In your pubspec.yaml file, depencies, add following lines:
       ref: 0.0.1
 ```
 
-In your project path, exec 
-```bash
-    flutter packages get
-```
-or use your favorite IDE to download dependencies.
-
-## Deps
-
-ListInCircle use some dependencies:
-- [rect_getter](https://pub.dev/packages/rect_getter)
-- [auto_size_text](https://pub.dev/packages/auto_size_text)
-
 Your dependencies section looks like:
 
 ```yaml
@@ -43,6 +31,20 @@ dependencies:
       ref: 0.0.1
   ...
 ```
+
+In your project path, exec 
+```bash
+    flutter packages get
+```
+or use your favorite IDE to download dependencies.
+
+## Deps
+
+For Flutter ^1.7
+
+ListInCircle use some dependencies:
+- [rect_getter](https://pub.dev/packages/rect_getter)
+- [auto_size_text](https://pub.dev/packages/auto_size_text)
 
 ## Usage
 
@@ -92,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
 | -------------- |:------------:|:------------: |:-----------|
 | circleDiameter | double       |  | Size of the circle diameter |
 | itemCollection | List<String> |  | Items to display in the Widget |
-| initialSelectdItem | int      | 0    | Index of the default selected item at state initialization |
+| initialSelectedItemIndex | int      | 0    | Index of the default selected item at state initialization |
 | circleColor | Color | Colors.white | Circle background color |
 | defaultFontSize | double | circleDiameter / 4 | Default text font size (will be autmaticaly resized if needed)  |
 | onSelectionChanged | Function |  | Closure executed when selection has been changed |
