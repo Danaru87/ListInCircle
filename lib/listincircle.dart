@@ -6,7 +6,6 @@ import 'src/listincirlce_state.dart';
 
 /// A list in a circle with position selection.
 class ListInCircleWidget extends StatefulWidget {
-
   /// Diameter size of the circular widget (Required)
   final double circleDiameter;
 
@@ -21,18 +20,20 @@ class ListInCircleWidget extends StatefulWidget {
   /// Closure executed when selection has been changed
   final Function onSelectionChanged;
 
-  /// Selected item color
-  final Color selectedColor;
+  /// Selected item text style
+  final TextStyle selectedTextStyle;
 
-  /// Unselected item color
-  final Color unSelectedColor;
+  /// Default selected item text style
+  static const TextStyle DEFAULT_SELECTED_TEXT_STYLE = TextStyle(color: Colors.blueAccent);
+
+  /// Unselected item text style
+  final TextStyle unSelectedTextStyle;
+
+  /// Default unselected item text style
+  static const TextStyle DEFAULT_UNSELECTED_TEXT_STYLE = TextStyle(color: Colors.black);
 
   /// Circle background color
   final Color circleColor;
-
-  /// Default text font size (will be autmaticaly resized if needed)
-  final double defaultFontSize;
-
 
   ListInCircleWidget(
       {Key key,
@@ -40,23 +41,18 @@ class ListInCircleWidget extends StatefulWidget {
       this.itemCollection,
       this.onSelectionChanged,
       this.initialSelectedItemIndex,
-      this.selectedColor = Colors.blueAccent,
-      this.unSelectedColor = Colors.black,
-      this.defaultFontSize,
+      this.selectedTextStyle = DEFAULT_SELECTED_TEXT_STYLE,
+      this.unSelectedTextStyle = DEFAULT_UNSELECTED_TEXT_STYLE,
       this.circleColor = Colors.white})
       : super(key: key);
 
-
-   @override
+  @override
   State<StatefulWidget> createState() => ListInCircleWidgetState(
       circleDiameter: this.circleDiameter,
       itemCollection: this.itemCollection,
       onSelectionChanged: this.onSelectionChanged,
-      selectedItemIndex: this.initialSelectedItemIndex, 
-      selectedItemColor: this.selectedColor, 
-      unselectedItemColor: this.unSelectedColor, 
-      defaultFontSize: this.defaultFontSize,
+      selectedItemIndex: this.initialSelectedItemIndex,
+      selectedTextStyle: this.selectedTextStyle,
+      unSelectedTextStyle: this.unSelectedTextStyle,
       circleBackgroundColor: this.circleColor);
 }
-
-
