@@ -4,7 +4,6 @@ import 'package:rect_getter/rect_getter.dart';
 
 import '../listincircle.dart';
 
-
 class ListInCircleWidgetState extends State<ListInCircleWidget> {
   int selectedItemIndex;
   double circleDiameter;
@@ -13,11 +12,9 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
   List<String> itemCollection;
   var _keys = {};
   Function onSelectionChanged;
-  Color selectedItemColor;
-  Color unselectedItemColor;
-  double defaultFontSize;
+  TextStyle selectedTextStyle;
+  TextStyle unSelectedTextStyle;
   Color circleBackgroundColor;
-
 
   ListInCircleWidgetState(
       {Key key,
@@ -25,15 +22,25 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
       this.selectedItemIndex,
       this.itemCollection,
       this.onSelectionChanged,
-      this.selectedItemColor,
-      this.unselectedItemColor, 
-      this.defaultFontSize,
+      this.selectedTextStyle,
+      this.unSelectedTextStyle,
       this.circleBackgroundColor})
-      : super(){
-        if (defaultFontSize == null){
-          this.defaultFontSize = circleDiameter / 4;
-        }
-      }
+      : super() {
+    double maxFontSize = circleDiameter / 4;
+    this.selectedTextStyle =
+        this._adjustFontSize(maxFontSize, this.selectedTextStyle);
+    this.unSelectedTextStyle =
+        this._adjustFontSize(maxFontSize, this.unSelectedTextStyle);
+  }
+
+  TextStyle _adjustFontSize(double maxFontSize, TextStyle textStyle) {
+    double fontSizeDelta = maxFontSize - textStyle.fontSize;
+    if (fontSizeDelta < 0) {
+      return textStyle.apply(fontSizeDelta: fontSizeDelta);
+    } else {
+      return textStyle;
+    }
+  }
 
   bool _itemIsInSelectionZone(Rect itemRect, index) {
     var rect = RectGetter.getRectFromKey(listViewKey);
@@ -58,16 +65,17 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
         !controller.position.outOfRange) {
       selectedItemIndex = 0;
       return;
-    } else if (controller.offset >= controller.position.maxScrollExtent && !controller.position.outOfRange){
+    } else if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
       selectedItemIndex = itemCollection.length - 1;
-
     } else {
       _keys.forEach((index, key) {
         var itemRect = RectGetter.getRectFromKey(key);
-        if(selectedItemIndex != index && _itemIsInSelectionZone(itemRect, index)){
+        if (selectedItemIndex != index &&
+            _itemIsInSelectionZone(itemRect, index)) {
           selectedItemIndex = index;
           onSelectionChanged(selectedItemIndex);
-        } 
+        }
       });
     }
   }
@@ -115,27 +123,23 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
                   var itemKey = RectGetter.createGlobalKey();
                   _keys[index] = itemKey;
                   return RectGetter(
-                      key: _keys[index],
-                      child: Center(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          height: circleDiameter / 3,
-                          child: Center(
-                            child: AutoSizeText(
-                              itemCollection[index],
-                              maxLines:2,
+                    key: _keys[index],
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        height: circleDiameter / 3,
+                        child: Center(
+                          child: AutoSizeText(itemCollection[index],
+                              maxLines: 2,
                               textAlign: TextAlign.center,
                               stepGranularity: 0.1,
-                              style: TextStyle(
-                                  color: (index == selectedItemIndex)
-                                      ? selectedItemColor
-                                      : unselectedItemColor,
-                                      fontSize: defaultFontSize
-                              ),
-                            ),
-                          ),
+                              style: (index == selectedItemIndex)
+                                  ? selectedTextStyle
+                                  : unSelectedTextStyle),
                         ),
-                      ));
+                      ),
+                    ),
+                  );
                 }),
           ),
         ),
