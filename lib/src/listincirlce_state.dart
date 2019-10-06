@@ -92,6 +92,11 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
     super.initState();
     controller = ScrollController();
     controller.addListener(_scrollListener);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      double position = circleDiameter / 3 * selectedItemIndex;
+      controller.animateTo(position,
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+    });
   }
 
   void executePostBackBuild(BuildContext context) {

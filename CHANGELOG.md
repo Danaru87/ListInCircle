@@ -1,3 +1,6 @@
+## [1.1.0] - 06/10/2019
+* The list scroll to the initial Selected Item
+
 ## [1.0.0] - 03/10/2019.
 
 * You can now specify a full TextStyle for list labels.
