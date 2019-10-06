@@ -15,6 +15,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
   TextStyle selectedTextStyle;
   TextStyle unSelectedTextStyle;
   Color circleBackgroundColor;
+  bool isAutoMove = false;
 
   ListInCircleWidgetState(
       {Key key,
@@ -105,6 +106,19 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
       selectedItemIndex = selectedItemIndex;
     });
   }
+  _scrollStarted(){
+    print("Scroll started");
+  }
+
+  _scrollEnded(){
+    print("Scroll has stop at $selectedItemIndex");
+    if (!isAutoMove){
+      isAutoMove = true;
+      double position = circleDiameter / 3 * selectedItemIndex;
+      controller.jumpTo(position);
+      isAutoMove = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,9 +133,13 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
             width: circleDiameter,
             height: circleDiameter,
             decoration: BoxDecoration(color: circleBackgroundColor),
-            child: ListView.builder(
+            child: NotificationListener<ScrollStartNotification>(
+              onNotification: (_) => _scrollStarted(),
+              child:NotificationListener<ScrollEndNotification>(
+                onNotification: (_) => _scrollEnded(),
+                child:ListView.builder(
                 padding: EdgeInsets.only(
-                    top: circleDiameter / 4, bottom: circleDiameter / 2),
+                    top: circleDiameter / 3, bottom: circleDiameter / 3),
                 controller: controller,
                 itemCount: itemCollection.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -145,7 +163,9 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
                       ),
                     ),
                   );
-                }),
+                })
+              )
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 ## [1.1.0] - 06/10/2019
 * The list scroll to the initial Selected Item
+* Now, the selected item is auto placed on the center
 
 ## [1.0.0] - 03/10/2019.
 
