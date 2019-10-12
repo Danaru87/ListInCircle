@@ -16,7 +16,7 @@ In your pubspec.yaml file, depencies, add following lines:
   listincircle:
     git:
       url: https://gitlab.com/uprefer/listincircle.git
-      ref: 0.0.1
+      ref: 1.2.0
 ```
 
 Your dependencies section looks like:
@@ -28,7 +28,7 @@ dependencies:
   listincircle:
     git:
       url: https://gitlab.com/uprefer/listincircle.git
-      ref: 0.0.1
+      ref: 1.2.0
   ...
 ```
 
@@ -98,8 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
 | circleColor | Color | Colors.white | Circle background color |
 | defaultFontSize | double | circleDiameter / 4 | Default text font size (will be autmaticaly resized if needed)  |
 | onSelectionChanged | Function |  | Closure executed when selection has been changed |
-| selectedColor | Color | Colors.blueAccent | Text color of the selectd item |
-| unSelectedColor | Color | Colors.black | Text color of unselected items |
+| onScrollEnded | Function | | Closure executed when scroll action ended |
+| selectedTextStyle | TextStyle | TextStyle(color: Colors.blueAccent) | Selected item text style |
+| unSelectedTextStyle | TextStyle | TextStyle(color: Colors.black) | Default unselected item text style |
 
 # Contributors
 
