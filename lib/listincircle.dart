@@ -20,6 +20,9 @@ class ListInCircleWidget extends StatefulWidget {
   /// Closure executed when selection has been changed
   final Function onSelectionChanged;
 
+  /// Closure executed when scroll action ended;
+  final Function onScrollEnded;
+
   /// Selected item text style
   final TextStyle selectedTextStyle;
 
@@ -40,6 +43,7 @@ class ListInCircleWidget extends StatefulWidget {
       @required this.circleDiameter,
       this.itemCollection,
       this.onSelectionChanged,
+      this.onScrollEnded,
       this.initialSelectedItemIndex,
       this.selectedTextStyle = DEFAULT_SELECTED_TEXT_STYLE,
       this.unSelectedTextStyle = DEFAULT_UNSELECTED_TEXT_STYLE,
@@ -51,6 +55,7 @@ class ListInCircleWidget extends StatefulWidget {
       circleDiameter: this.circleDiameter,
       itemCollection: this.itemCollection,
       onSelectionChanged: this.onSelectionChanged,
+      onScrollEnded: this.onScrollEnded,
       selectedItemIndex: this.initialSelectedItemIndex,
       selectedTextStyle: this.selectedTextStyle,
       unSelectedTextStyle: this.unSelectedTextStyle,

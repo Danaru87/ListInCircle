@@ -12,6 +12,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
   List<String> itemCollection;
   var _keys = {};
   Function onSelectionChanged;
+  Function onScrollEnded;
   TextStyle selectedTextStyle;
   TextStyle unSelectedTextStyle;
   Color circleBackgroundColor;
@@ -23,6 +24,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
       this.selectedItemIndex,
       this.itemCollection,
       this.onSelectionChanged,
+      this.onScrollEnded,
       this.selectedTextStyle,
       this.unSelectedTextStyle,
       this.circleBackgroundColor})
@@ -117,6 +119,7 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
       double position = circleDiameter / 3 * selectedItemIndex;
       controller.jumpTo(position);
       isAutoMove = false;
+      onScrollEnded();
     }
   }
 
