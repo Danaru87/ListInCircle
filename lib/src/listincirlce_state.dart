@@ -108,12 +108,8 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
       selectedItemIndex = selectedItemIndex;
     });
   }
-  _scrollStarted(){
-    print("Scroll started");
-  }
 
   _scrollEnded(){
-    print("Scroll has stop at $selectedItemIndex");
     if (!isAutoMove){
       isAutoMove = true;
       double position = circleDiameter / 3 * selectedItemIndex;
@@ -136,38 +132,35 @@ class ListInCircleWidgetState extends State<ListInCircleWidget> {
             width: circleDiameter,
             height: circleDiameter,
             decoration: BoxDecoration(color: circleBackgroundColor),
-            child: NotificationListener<ScrollStartNotification>(
-              onNotification: (_) => _scrollStarted(),
-              child:NotificationListener<ScrollEndNotification>(
-                onNotification: (_) => _scrollEnded(),
-                child:ListView.builder(
-                padding: EdgeInsets.only(
-                    top: circleDiameter / 3, bottom: circleDiameter / 3),
-                controller: controller,
-                itemCount: itemCollection.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var itemKey = RectGetter.createGlobalKey();
-                  _keys[index] = itemKey;
-                  return RectGetter(
-                    key: _keys[index],
-                    child: Center(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        height: circleDiameter / 3,
-                        child: Center(
-                          child: AutoSizeText(itemCollection[index],
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                              stepGranularity: 0.1,
-                              style: (index == selectedItemIndex)
-                                  ? selectedTextStyle
-                                  : unSelectedTextStyle),
-                        ),
+            child: NotificationListener<ScrollEndNotification>(
+              onNotification: (_) => _scrollEnded(),
+              child:ListView.builder(
+              padding: EdgeInsets.only(
+                  top: circleDiameter / 3, bottom: circleDiameter / 3),
+              controller: controller,
+              itemCount: itemCollection.length,
+              itemBuilder: (BuildContext context, int index) {
+                var itemKey = RectGetter.createGlobalKey();
+                _keys[index] = itemKey;
+                return RectGetter(
+                  key: _keys[index],
+                  child: Center(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      height: circleDiameter / 3,
+                      child: Center(
+                        child: AutoSizeText(itemCollection[index],
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            stepGranularity: 0.1,
+                            style: (index == selectedItemIndex)
+                                ? selectedTextStyle
+                                : unSelectedTextStyle),
                       ),
                     ),
-                  );
-                })
-              )
+                  ),
+                );
+              })
             ),
           ),
         ),
