@@ -2,7 +2,7 @@ library listincircle;
 
 import 'package:flutter/material.dart';
 
-import 'src/listincirlce_state.dart';
+import 'listincirlce_state.dart';
 
 /// A list in a circle with position selection.
 class ListInCircleWidget extends StatefulWidget {
@@ -18,7 +18,7 @@ class ListInCircleWidget extends StatefulWidget {
   final List<String> itemCollection;
 
   /// Closure executed when selection has been changed
-  final Function onSelectionChanged;
+  final ValueChanged<int> onSelectionChanged;
 
   /// Closure executed when scroll action ended;
   final Function onScrollEnded;
@@ -27,13 +27,15 @@ class ListInCircleWidget extends StatefulWidget {
   final TextStyle selectedTextStyle;
 
   /// Default selected item text style
-  static const TextStyle DEFAULT_SELECTED_TEXT_STYLE = TextStyle(color: Colors.blueAccent);
+  static const TextStyle DEFAULT_SELECTED_TEXT_STYLE =
+      TextStyle(color: Colors.blueAccent, fontSize: 50.0);
 
   /// Unselected item text style
   final TextStyle unSelectedTextStyle;
 
   /// Default unselected item text style
-  static const TextStyle DEFAULT_UNSELECTED_TEXT_STYLE = TextStyle(color: Colors.black);
+  static const TextStyle DEFAULT_UNSELECTED_TEXT_STYLE =
+      TextStyle(color: Colors.black, fontSize: 50.0);
 
   /// Circle background color
   final Color circleColor;
@@ -41,7 +43,7 @@ class ListInCircleWidget extends StatefulWidget {
   ListInCircleWidget(
       {Key key,
       @required this.circleDiameter,
-      this.itemCollection,
+      @required this.itemCollection,
       this.onSelectionChanged,
       this.onScrollEnded,
       this.initialSelectedItemIndex,
@@ -52,12 +54,7 @@ class ListInCircleWidget extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => ListInCircleWidgetState(
-      circleDiameter: this.circleDiameter,
-      itemCollection: this.itemCollection,
-      onSelectionChanged: this.onSelectionChanged,
-      onScrollEnded: this.onScrollEnded,
-      selectedItemIndex: this.initialSelectedItemIndex,
-      selectedTextStyle: this.selectedTextStyle,
-      unSelectedTextStyle: this.unSelectedTextStyle,
-      circleBackgroundColor: this.circleColor);
+      circleDiameter: circleDiameter,
+      unSelectedTextStyle: unSelectedTextStyle,
+      selectedTextStyle: selectedTextStyle);
 }

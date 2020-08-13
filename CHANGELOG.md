@@ -1,3 +1,8 @@
+## [1.2.1] - 13/08/2020
+* Performance improvements
+* List keeps selected element centered
+* onSelectionChanged callback receives current index as parameter
+
 ## [1.2.0] - 12/10/2019
 * You can do action (pas a closure / callback) at Scroll Ending Event (onScrollEnded)
 
