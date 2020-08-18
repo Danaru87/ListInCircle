@@ -16,7 +16,7 @@ In your pubspec.yaml file, depencies, add following lines:
   listincircle:
     git:
       url: https://gitlab.com/uprefer/listincircle.git
-      ref: 1.2.0
+      ref: 1.2.1
 ```
 
 Your dependencies section looks like:
@@ -28,7 +28,7 @@ dependencies:
   listincircle:
     git:
       url: https://gitlab.com/uprefer/listincircle.git
-      ref: 1.2.0
+      ref: 1.2.1
   ...
 ```
 
